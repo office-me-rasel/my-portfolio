@@ -40,10 +40,11 @@ a{color:inherit}
 header{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
 .mark{font-weight:700;text-decoration:none;letter-spacing:.02em}
 nav{display:flex;align-items:center}
-nav>a{margin-left:22px;text-decoration:none;color:var(--soft);font-size:.92rem}
-nav>a:hover{color:var(--ink)}
+.menu{display:flex;align-items:center}
+.menu a{margin-left:22px;text-decoration:none;color:var(--soft);font-size:.92rem}
+.menu a:hover{color:var(--ink)}
 .theme-btn{margin-left:12px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-grid;place-items:center;transition:background .2s,color .2s}
-nav>a+.theme-btn,nav>a+.pal-wrap{margin-left:20px}
+.pal-wrap{margin-left:20px}
 .theme-btn:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .theme-btn .sun{display:none}
 :root[data-theme="light"] .theme-btn .sun{display:block}
@@ -51,6 +52,7 @@ nav>a+.theme-btn,nav>a+.pal-wrap{margin-left:20px}
 .pal-wrap{position:relative}
 .pal-wrap .theme-btn{margin-left:0}
 nav>.theme-btn{margin-left:12px}
+.menu-btn{display:none}
 .pal{position:absolute;right:0;top:48px;display:flex;gap:10px;padding:10px 12px;background:var(--panel);border:1px solid var(--line);border-radius:999px}
 .pal[hidden]{display:none}
 .pal button{width:26px;height:26px;border-radius:50%;border:2px solid transparent;cursor:pointer;outline:1px solid var(--line)}
@@ -109,7 +111,7 @@ nav>.theme-btn{margin-left:12px}
 .js .reveal .sk i::after{width:0}
 .js .reveal.in .sk i::after{width:var(--l);transition:width 1.2s ease .3s}
 .ach{list-style:none;padding:0;display:grid;gap:14px}
-.ach li{display:grid;grid-template-columns:70px 1fr;gap:12px}
+.ach li{display:grid;grid-template-columns:84px 1fr;gap:12px}
 .ach .y{color:var(--accent);font-weight:700}
 .ach b{display:block}
 .ach span{color:var(--soft);font-size:.92rem}
@@ -127,6 +129,33 @@ nav>.theme-btn{margin-left:12px}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
 .ph:hover img{transform:scale(1.05)}
 .gallery figcaption{margin-top:8px;font-size:.88rem;color:var(--soft);line-height:1.5}
+.page{display:none;padding:56px 0 72px}
+html.view-articles #top{display:none}
+html.view-articles .page{display:block;animation:pgin .5s ease}
+@keyframes pgin{from{opacity:0;transform:translateY(16px)}}
+.page .back{display:inline-block;color:var(--soft);text-decoration:none;font-size:.92rem;margin-bottom:28px}
+.page .back:hover{color:var(--ink)}
+.page h1{font-weight:200;font-size:clamp(2.6rem,8vw,5rem);line-height:1;letter-spacing:-.04em}
+.page .sub{color:var(--soft);margin:14px 0 40px}
+.menu a.on{color:var(--ink)}
+.meta{color:var(--accent);font-size:.8rem;font-weight:500}
+.art-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.art{text-align:left;display:grid;gap:8px;align-content:start;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;color:var(--ink);font:inherit;cursor:pointer;transition:border-color .25s,transform .25s}
+.art:hover{border-color:var(--accent);transform:translateY(-3px)}
+.art h3{font-size:1.2rem;line-height:1.3}
+.art p{color:var(--soft);font-size:.94rem;margin:0}
+.art .more{color:var(--accent);font-size:.9rem;font-weight:500}
+.reader{position:fixed;inset:0;z-index:95;background:var(--bg);overflow:auto;display:none}
+.reader.open{display:block}
+html.reading{overflow:hidden}
+.rd{max-width:720px;margin:0 auto;padding:84px 24px 96px}
+.rd h2{font-weight:200;font-size:clamp(2rem,6vw,3.4rem);line-height:1.12;letter-spacing:-.03em;margin:10px 0 28px}
+.rd img{width:100%;border-radius:16px;margin-bottom:28px;display:block}
+.rd p{font-size:1.08rem;line-height:1.9;margin-bottom:20px}
+.rd h3{font-size:1.25rem;margin:34px 0 12px}
+.rd-foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
+.rd-x{position:fixed;top:16px;right:16px;z-index:96;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:1.5rem;cursor:pointer;display:grid;place-items:center}
+.rd-x:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:32px}
 .big{font-weight:200;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
 .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
@@ -179,9 +208,12 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
   .map iframe{height:240px}
 }
 @media(max-width:560px){
-  nav>a{display:none}
-  nav>a.keep{display:block;margin-left:0}
-  nav>.theme-btn,.pal-wrap{margin-left:8px}
+  .menu-btn{display:inline-grid}
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:flex-start;padding:6px 24px 16px;background:var(--bg);border-bottom:1px solid var(--line)}
+  .menu.open{display:flex}
+  .menu a{margin:0;padding:11px 0;font-size:1.02rem;width:100%;color:var(--ink)}
+  .pal-wrap{margin-left:8px}
+  nav>.theme-btn{margin-left:8px}
   .theme-btn{width:36px;height:36px}
   .ach li{grid-template-columns:1fr}
 }
@@ -203,7 +235,7 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
     <header>
       <a class="mark" href="#top">Md. Rasel</a>
       <nav>
-        <a href="#about">About</a><a href="#experience">Experience</a><a href="#gallery">Gallery</a><a class="keep" href="#contact">Contact</a>
+        <div class="menu" id="menu"><a href="#about">About</a><a href="#experience">Experience</a><a href="#gallery">Gallery</a><a href="#articles" data-nav="articles">Articles</a><a href="#contact">Contact</a></div>
         <div class="pal-wrap">
           <button class="theme-btn" id="palBtn" type="button" aria-label="Choose accent colour" aria-expanded="false" aria-controls="pal">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.2 12 3 12 3z"/></svg>
@@ -219,6 +251,9 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
         <svg class="moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
         <svg class="sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       </button>
+      <button class="theme-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </nav>
     </header>
   </div>
@@ -323,6 +358,7 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
       <section class="card c3 reveal" id="achievements" data-tilt>
         <h2>Achievements</h2>
         <ul class="ach">
+          <li><span class="y">2025/26</span><div><b>Best Performer</b><span>Chandpur Zone</span></div></li>
         </ul>
       </section>
 
@@ -346,7 +382,7 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
         <div class="gallery">
           <figure>
             <button class="ph" type="button" aria-label="Open photo 1">Photo 1<img src="photo1.jpg" alt="Gallery photo 1" loading="lazy" onerror="this.remove()"></button>
-            <figcaption>With Abdur Rashed Sir! My first leader, my first lesson. He tought me, in Sales we build relationships, not just sell products. I'm forever grateful to You Sir</figcaption>
+            <figcaption>With Abdur Rashed Sir! My first leader, my first lesson. He taught me, in Sales we build relationships, not just sell products. I'm forever grateful to you Sir.</figcaption>
           </figure>
           <figure>
             <button class="ph" type="button" aria-label="Open photo 2">Photo 2<img src="photo2.jpg" alt="Gallery photo 2" loading="lazy" onerror="this.remove()"></button>
@@ -395,12 +431,24 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
     </div>
   </main>
 
+  <section class="page" id="articlesPage" aria-label="Articles">
+    <a class="back" href="#top">&larr; Back to home</a>
+    <h1>Articles</h1>
+    <p class="sub">Lessons and thoughts from the field.</p>
+    <div class="art-list" id="artList"></div>
+  </section>
+
   <footer>&copy; <span id="year"></span> Md. Rasel</footer>
 </div>
 
 <button class="totop" id="totop" type="button" aria-label="Back to top">
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 15 7-7 7 7"/></svg>
 </button>
+
+<div class="reader" id="reader" role="dialog" aria-modal="true" aria-label="Article">
+  <button class="rd-x" id="rdX" aria-label="Close article">&times;</button>
+  <article class="rd"><div id="rdBody"></div><div class="rd-foot" id="rdFoot"></div></article>
+</div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="x" id="lbx" aria-label="Close">&times;</button>
@@ -418,6 +466,28 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
   // Contact form: formspree.io theke pawa link boshan (jemon "https://formspree.io/f/abcdwxyz").
   // Khali rakhle "Send" chaple email app khule jabe.
   const FORM_ENDPOINT   = "";
+
+  // ===== ARTICLE LEKHAR JAYGA =====
+  // Notun article likhte: nicher { ... } block ta copy kore NIJER UPORE (list er shurute) boshan, tarpor ei , chinho diye alada korun.
+  // Bangla te likhleo hobe. Prottek paragraph ek ta "..." er bhitore. "## " diye shuru korle seta sub-heading hoy.
+  // Ekdom shob article muche felle Articles section o menu theke lukiye jabe.
+  const ARTICLES = [
+    {
+      id: "field-sales-lessons",          // chhoto, shudhu English letter/number, space chara (article er link e lage)
+      title: "ফিল্ড সেলস আমাকে যা শিখিয়েছে",
+      category: "Sales",
+      date: "2026-11-11",                 // bochor-mash-din
+      summary: "ফিল্ড সেলস শুধু প্রোডাক্ট বেচা না। এটা মানুষ চেনা।",
+      image: "",                          // chobi dite chaile naam likhun, jemon "article1.jpg"
+      body: [
+        "ফিল্ড সেলস শুধু প্রোডাক্ট বেচা না। এটা মানুষ চেনা।",
+        "গত ৩ বছর ধরে মাঠ পর্যায়ে কাজ করে আমি একটা জিনিস বুঝেছি - দোকানদার তার দোকান থেকে না, তার বিশ্বাস থেকে অর্ডার দেয়।",
+        "সকালে মার্কেটে বের হওয়া, প্রতিটা আউটলেটে গিয়ে কথা বলা, ডিউ কালেকশন, টার্গেটের প্রেশার - এগুলো আমাকে শৃঙ্খলা, ধৈর্য আর কমিউনিকেশন শিখিয়েছে।",
+        "আমি বিশ্বাস করি, একজন ভালো সেলস রিপ্রেজেন্টেটিভের কাজ অর্ডার নেওয়া না, ডিলারের ব্যবসা বাড়ানো। ডিলার লাভ করলে কোম্পানি এমনিতেই বাড়বে।",
+        "আমার লক্ষ্য এখন একটাই - মাঠের এই বাস্তব অভিজ্ঞতাকে কাজে লাগিয়ে একদিন একজন দক্ষ টেরিটরি সেলস ম্যানেজার হওয়া।"
+      ]
+    }
+  ];
   // ===================================
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -589,7 +659,7 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
       x = e.clientX; y = e.clientY;
       if (!on) { on = true; rx = x; ry = y; root.classList.add("cursor"); loop(); }
       dot.style.transform = "translate(" + x + "px," + y + "px)";
-      ring.classList.toggle("big", !!e.target.closest("a,button,.ph,.chips span"));
+      ring.classList.toggle("big", !!e.target.closest("a,button,.ph,.chips span,.art"));
     });
     function loop() {
       rx += (x - rx) * 0.18; ry += (y - ry) * 0.18;
@@ -597,6 +667,85 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
       requestAnimationFrame(loop);
     }
   }
+
+  // mobile menu
+  var menu = $("#menu"), menuBtn = $("#menuBtn");
+  function setMenu(open) { menu.classList.toggle("open", open); menuBtn.setAttribute("aria-expanded", String(open)); }
+  menuBtn.addEventListener("click", function (e) { e.stopPropagation(); setMenu(!menu.classList.contains("open")); });
+  $$("#menu a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+  document.addEventListener("click", function (e) { if (!e.target.closest("#menu")) setMenu(false); });
+  addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
+
+  // articles
+  (function () {
+    var list = $("#artList");
+    if (!ARTICLES.length) {
+      $$("[data-nav=articles]").forEach(function (a) { a.hidden = true; });
+      return;
+    }
+    var rd = $("#reader"), body = $("#rdBody"), foot = $("#rdFoot"), lastFocus = null;
+    function mk(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+    function fmt(d) {
+      try { return new Date(d + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }); }
+      catch (e) { return d || ""; }
+    }
+    function metaOf(a) { return [a.category, fmt(a.date)].filter(Boolean).join(" \u00b7 "); }
+    ARTICLES.forEach(function (a) {
+      var b = mk("button", "art"); b.type = "button";
+      b.appendChild(mk("span", "meta", metaOf(a)));
+      b.appendChild(mk("h3", "", a.title));
+      b.appendChild(mk("p", "", a.summary || ""));
+      b.appendChild(mk("span", "more", "Read article \u2192"));
+      b.addEventListener("click", function () { lastFocus = b; location.hash = "article-" + a.id; });
+      list.appendChild(b);
+    });
+    function render(a) {
+      body.textContent = ""; foot.textContent = "";
+      body.appendChild(mk("div", "meta", metaOf(a)));
+      body.appendChild(mk("h2", "", a.title));
+      if (a.image) { var im = mk("img"); im.src = a.image; im.alt = a.title; im.onerror = function () { im.remove(); }; body.appendChild(im); }
+      (a.body || []).forEach(function (t) {
+        if (t.indexOf("## ") === 0) body.appendChild(mk("h3", "", t.slice(3)));
+        else body.appendChild(mk("p", "", t));
+      });
+      var share = mk("a", "btn solid", "Share on WhatsApp");
+      share.href = "https://wa.me/?text=" + encodeURIComponent(a.title + " " + location.href.split("#")[0] + "#article-" + a.id);
+      share.target = "_blank"; share.rel = "noopener";
+      var back = mk("button", "btn", "\u2190 All articles"); back.type = "button";
+      back.addEventListener("click", closeArt);
+      foot.appendChild(share); foot.appendChild(back);
+    }
+    function closeArt() { if (location.hash.indexOf("#article-") === 0) location.hash = "articles"; }
+    function route() {
+      var h = location.hash;
+      var inArt = h === "#articles" || h.indexOf("#article-") === 0;
+      var was = root.classList.contains("view-articles");
+      root.classList.toggle("view-articles", inArt);
+      $$("[data-nav=articles]").forEach(function (a) { a.classList.toggle("on", inArt); });
+      if (inArt && !was) scrollTo(0, 0);
+      if (!inArt && was) {
+        var t = h.length > 1 ? document.getElementById(decodeURIComponent(h.slice(1))) : null;
+        if (t) t.scrollIntoView(); else scrollTo(0, 0);
+      }
+      if (h.indexOf("#article-") === 0) {
+        var id = decodeURIComponent(h.slice(9));
+        var a = ARTICLES.filter(function (x) { return x.id === id; })[0];
+        if (a) {
+          render(a); rd.classList.add("open"); root.classList.add("reading"); rd.scrollTop = 0;
+          $("#rdX").focus();
+          return;
+        }
+      }
+      if (rd.classList.contains("open")) {
+        rd.classList.remove("open"); root.classList.remove("reading");
+        if (lastFocus) lastFocus.focus();
+      }
+    }
+    $("#rdX").addEventListener("click", closeArt);
+    addEventListener("keydown", function (e) { if (e.key === "Escape" && rd.classList.contains("open")) closeArt(); });
+    addEventListener("hashchange", route);
+    route();
+  })();
 
   // lightbox
   var lb = $("#lb"), lbi = $("#lbi"), lbc = $("#lbc"), cur = 0, items = [];
