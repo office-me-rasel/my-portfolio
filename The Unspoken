@@ -1,0 +1,22 @@
+{
+  "articles": [
+    {
+      "id": "the-unspoken",
+      "title": "The Unspoken",
+      "category": "Poetry",
+      "date": "2026-11-13",
+      "summary": "I am not broken, I am just tired.",
+      "image": "",
+      "body": "I have no reason to be sad,\nyet my chest feels heavy.\nLike clouds have gathered in the sky,\nbut the rain refuses to fall.\nIt wants to pour, but it cannot.\n\nI smile, I talk, I blend in with everyone —\nbut at the end of the day, when I am alone,\nI feel like a stranger to myself.\nAs if I am lost inside my own soul.\n\nI want to tell someone,\n\"You know, I don't feel good.\"\nBut what will I say? I don't even know why I don't feel good.\nI just know, something is missing.\nSomething that was supposed to be here,\nis not here anymore.\n\nMaybe I am not missing someone,\nI am missing me.\nThe me who used to be happy with so little.\nThe me who used to laugh with an open heart,\nand cry with an open soul.\n\nNow I just stay silent.\nBecause even tears need a language,\nand my tears have no language.\nMy pain has no name.\n\nI am not broken,\nI am just tired.\nTired of being strong for so long.\nTired of saying \"I am fine\" for so long.\n\nIf just once, someone came and said,\n\"It's okay, you don't have to be strong.\"\nThen maybe this gathered cloud\nwould finally fall as rain."
+    },
+    {
+      "id": "field-sales-lessons",
+      "title": "ফিল্ড সেলস আমাকে যা শিখিয়েছে",
+      "category": "Sales",
+      "date": "2026-11-11",
+      "summary": "ফিল্ড সেলস শুধু প্রোডাক্ট বেচা না। এটা মানুষ চেনা।",
+      "image": "",
+      "body": "ফিল্ড সেলস শুধু প্রোডাক্ট বেচা না। এটা মানুষ চেনা।\n\nগত ৩ বছর ধরে মাঠ পর্যায়ে কাজ করে আমি একটা জিনিস বুঝেছি - দোকানদার তার দোকান থেকে না, তার বিশ্বাস থেকে অর্ডার দেয়।\n\nসকালে মার্কেটে বের হওয়া, প্রতিটা আউটলেটে গিয়ে কথা বলা, ডিউ কালেকশন, টার্গেটের প্রেশার - এগুলো আমাকে শৃঙ্খলা, ধৈর্য আর কমিউনিকেশন শিখিয়েছে।\n\nআমি বিশ্বাস করি, একজন ভালো সেলস রিপ্রেজেন্টেটিভের কাজ অর্ডার নেওয়া না, ডিলারের ব্যবসা বাড়ানো। ডিলার লাভ করলে কোম্পানি এমনিতেই বাড়বে।\n\nআমার লক্ষ্য এখন একটাই - মাঠের এই বাস্তব অভিজ্ঞতাকে কাজে লাগিয়ে একদিন একজন দক্ষ টেরিটরি সেলস ম্যানেজার হওয়া।"
+    }
+  ]
+}
