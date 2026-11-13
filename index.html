@@ -7,24 +7,24 @@
 <meta name="description" content="Md. Rasel, Sales Professional with 3.5 years of FMCG experience at PRAN-RFL Group.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#0d0f0e">
-<link rel="canonical" href="https://YOUR-SITE.vercel.app/">
+<link rel="canonical" href="https://me-rasel.vercel.app/">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<!-- SHARE PREVIEW (WhatsApp / Facebook): YOUR-SITE.vercel.app er jayga e nijer Vercel link boshan -->
+<!-- SHARE PREVIEW (WhatsApp / Facebook): site link boshano ache -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Md. Rasel">
 <meta property="og:title" content="Md. Rasel | Sales Professional">
 <meta property="og:description" content="FMCG field sales professional with 3.5 years of experience at PRAN-RFL Group, Chandpur.">
-<meta property="og:url" content="https://YOUR-SITE.vercel.app/">
-<meta property="og:image" content="https://YOUR-SITE.vercel.app/og.png">
+<meta property="og:url" content="https://me-rasel.vercel.app/">
+<meta property="og:image" content="https://me-rasel.vercel.app/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Md. Rasel | Sales Professional">
 <meta name="twitter:description" content="FMCG field sales professional with 3.5 years of experience at PRAN-RFL Group, Chandpur.">
-<meta name="twitter:image" content="https://YOUR-SITE.vercel.app/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Md. Rasel","jobTitle":"Sales Professional","worksFor":{"@type":"Organization","name":"PRAN-RFL Group"},"url":"https://YOUR-SITE.vercel.app/","sameAs":["https://facebook.com/Md.Rasel.Mahmud10","https://linkedin.com/in/dr-md-rasel"]}</script>
+<meta name="twitter:image" content="https://me-rasel.vercel.app/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Md. Rasel","jobTitle":"Sales Professional","worksFor":{"@type":"Organization","name":"PRAN-RFL Group"},"url":"https://me-rasel.vercel.app/","sameAs":["https://facebook.com/Md.Rasel.Mahmud10","https://linkedin.com/in/dr-md-rasel"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600&family=Manrope:wght@200;400;500;700&display=swap" rel="stylesheet">
@@ -231,6 +231,10 @@ html.reading,html.modal-open{overflow:hidden}
 .rd img{width:100%;border-radius:16px;margin-bottom:28px;display:block}
 .rd p{font-size:1.08rem;line-height:1.9;margin-bottom:20px}
 .rd h3{font-size:1.25rem;margin:34px 0 12px}
+.rd ul,.rd ol{margin:0 0 20px 24px;font-size:1.08rem;line-height:1.9}
+.rd li{margin-bottom:6px}
+.rd blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:0 0 20px;color:var(--soft);font-size:1.08rem;line-height:1.9}
+.rd a{color:var(--accent)}
 .rd-foot{display:flex;gap:10px;flex-wrap:wrap;margin-top:40px;padding-top:24px;border-top:1px solid var(--line)}
 .rd-x{position:fixed;top:16px;right:16px;z-index:96;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--ink);font-size:1.5rem;cursor:pointer;display:grid;place-items:center}
 .rd-x:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
@@ -657,11 +661,13 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
   const TESTIMONIALS = [
   ];
 
-  // ===== ARTICLE LEKHAR JAYGA =====
+  // ===== ARTICLE (BACKUP LIST) =====
+  // Ekhon notun article admin panel (yoursite/admin) theke lekha hoy, ar seta articles.json file e jomay.
+  // articles.json file pawa na gele (jemon internet chhara file khulle) tokhon nicher list ta dekhabe.
   // Notun article likhte: nicher { ... } block ta copy kore NIJER UPORE (list er shurute) boshan, tarpor ei , chinho diye alada korun.
   // Bangla te likhleo hobe. Prottek paragraph ek ta "..." er bhitore. "## " diye shuru korle seta sub-heading hoy.
   // Ekdom shob article muche felle Articles section o menu theke lukiye jabe.
-  const ARTICLES = [
+  var ARTICLES = [
     {
       id: "field-sales-lessons",          // chhoto, shudhu English letter/number, space chara (article er link e lage)
       title: "ফিল্ড সেলস আমাকে যা শিখিয়েছে",
@@ -988,8 +994,71 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
   document.addEventListener("click", function (e) { if (!e.target.closest("#menu")) setMenu(false); });
   addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
 
-  // articles
-  (function () {
+  // ===== articles: load from articles.json (written by the admin panel) =====
+  function hashId(str) { var h = 5381; for (var i = 0; i < str.length; i++) { h = ((h << 5) + h + str.charCodeAt(i)) | 0; } return Math.abs(h).toString(36); }
+  function normArticles(list) {
+    return list.filter(function (a) { return a && a.title; }).map(function (a) {
+      var body = Array.isArray(a.body) ? a.body.join("\n\n") : String(a.body || "");
+      var date = String(a.date || "").slice(0, 10);
+      var plain = body.replace(/[#*>`\[\]()!]/g, "").replace(/\s+/g, " ").trim();
+      return {
+        id: a.id || ((date || "a") + "-" + hashId(String(a.title))),
+        title: String(a.title), category: a.category || "", date: date,
+        summary: a.summary || (plain.length > 140 ? plain.slice(0, 140) + "..." : plain),
+        image: a.image || "", body: body
+      };
+    }).sort(function (x, y) { return (y.date > x.date) - (y.date < x.date); });
+  }
+  function loadArticles(cb) {
+    ARTICLES = normArticles(ARTICLES);
+    fetch("articles.json", { cache: "no-cache" })
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(function (j) { if (j && Array.isArray(j.articles)) ARTICLES = normArticles(j.articles); })
+      .catch(function () {})
+      .then(cb);
+  }
+  // small, safe markdown renderer (builds DOM nodes, never raw HTML)
+  function mdInline(text, parent) {
+    var re = /\*\*([^*]+)\*\*|\*([^*\n]+)\*|\[([^\]]+)\]\(([^)\s]+)\)/g, last = 0, m;
+    function addText(t) {
+      t.split("\n").forEach(function (l, i) { if (i) parent.appendChild(document.createElement("br")); parent.appendChild(document.createTextNode(l)); });
+    }
+    while ((m = re.exec(text))) {
+      if (m.index > last) addText(text.slice(last, m.index));
+      if (m[1] !== undefined) { var b = document.createElement("strong"); b.textContent = m[1]; parent.appendChild(b); }
+      else if (m[2] !== undefined) { var i = document.createElement("em"); i.textContent = m[2]; parent.appendChild(i); }
+      else {
+        var a = document.createElement("a"); a.textContent = m[3];
+        if (/^(https?:|mailto:|\/|#)/i.test(m[4])) { a.href = m[4]; a.target = "_blank"; a.rel = "noopener"; }
+        parent.appendChild(a);
+      }
+      last = re.lastIndex;
+    }
+    if (last < text.length) addText(text.slice(last));
+  }
+  function mdRender(md, box) {
+    md = String(md || "").replace(/\r/g, "").replace(/^(#{1,4} .*)$/gm, "\n\n$1\n\n");
+    md.split(/\n{2,}/).forEach(function (blk) {
+      blk = blk.trim(); if (!blk) return;
+      var m = blk.match(/^#{1,4}\s+(.+)$/);
+      if (m) { var h = document.createElement("h3"); mdInline(m[1], h); box.appendChild(h); return; }
+      m = blk.match(/^!\[([^\]]*)\]\(([^)\s]+)\)$/);
+      if (m) { var im = document.createElement("img"); im.src = m[2]; im.alt = m[1]; im.loading = "lazy"; im.onerror = function () { im.remove(); }; box.appendChild(im); return; }
+      var lines = blk.split("\n");
+      if (lines.every(function (l) { return /^\s*([-*]|\d+\.)\s+/.test(l); })) {
+        var ol = /^\s*\d+\./.test(lines[0]), list = document.createElement(ol ? "ol" : "ul");
+        lines.forEach(function (l) { var li = document.createElement("li"); mdInline(l.replace(/^\s*([-*]|\d+\.)\s+/, ""), li); list.appendChild(li); });
+        box.appendChild(list); return;
+      }
+      if (/^>/.test(blk)) {
+        var q = document.createElement("blockquote");
+        mdInline(lines.map(function (l) { return l.replace(/^>\s?/, ""); }).join("\n"), q); box.appendChild(q); return;
+      }
+      var p = document.createElement("p"); mdInline(blk, p); box.appendChild(p);
+    });
+  }
+
+  function initArticles() {
     var list = $("#artList"), tools = $("#artTools"), search = $("#artSearch"), cats = $("#artCats"), none = $("#artNone");
     if (!ARTICLES.length) {
       $$("[data-nav=articles]").forEach(function (a) { a.hidden = true; });
@@ -1016,7 +1085,7 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
       list.textContent = "";
       ARTICLES.forEach(function (a) {
         if (curCat && a.category !== curCat) return;
-        if (q && (a.title + " " + (a.summary || "") + " " + (a.body || []).join(" ")).toLowerCase().indexOf(q) < 0) return;
+        if (q && (a.title + " " + (a.summary || "") + " " + a.body).toLowerCase().indexOf(q) < 0) return;
         var b = card(a);
         b.addEventListener("click", function () { lastFocus = b; go(a.id); });
         list.appendChild(b); n++;
@@ -1043,10 +1112,7 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
       body.appendChild(mk("div", "meta", metaOf(a)));
       body.appendChild(mk("h2", "", a.title));
       if (a.image) { var im = mk("img"); im.src = a.image; im.alt = a.title; im.onerror = function () { im.remove(); }; body.appendChild(im); }
-      (a.body || []).forEach(function (x) {
-        if (x.indexOf("## ") === 0) body.appendChild(mk("h3", "", x.slice(3)));
-        else body.appendChild(mk("p", "", x));
-      });
+      mdRender(a.body, body);
       var row = mk("div", "rd-foot");
       var share = mk("a", "btn solid", t("shareWa"));
       share.href = "https://wa.me/?text=" + encodeURIComponent(a.title + " " + location.href.split("#")[0] + "#article-" + a.id);
@@ -1097,7 +1163,8 @@ html.cursor .cur-dot,html.cursor .cur-ring{opacity:1}
       if (rd.classList.contains("open")) route();
     });
     renderTools(); renderList(); route();
-  })();
+  }
+  loadArticles(initArticles);
 
   // testimonials
   (function () {
