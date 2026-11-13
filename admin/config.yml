@@ -1,0 +1,35 @@
+# Admin panel settings (Sveltia CMS)
+# GitHub username o site link boshano ache.
+
+backend:
+  name: github
+  repo: office-me-rasel/my-portfolio
+  branch: main
+
+site_url: https://me-rasel.vercel.app
+display_url: https://me-rasel.vercel.app
+
+media_folder: uploads
+public_folder: /uploads
+
+collections:
+  - name: content
+    label: Articles
+    files:
+      - name: articles
+        label: My Articles
+        file: articles.json
+        fields:
+          - label: Articles
+            name: articles
+            widget: list
+            label_singular: Article
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Category, name: category, widget: string, default: Sales, hint: "Jemon: Sales, Career, Life" }
+              - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+              - { label: Short summary, name: summary, widget: text, required: false, hint: "Article list e dekhabe. Khali rakhle nijei toiri hobe." }
+              - { label: Cover image, name: image, widget: image, required: false }
+              - { label: Article text, name: body, widget: markdown }
+              - { label: "Link name (khali rakhun)", name: id, widget: string, required: false, hint: "Khali rakhun. Nijei toiri hobe." }
